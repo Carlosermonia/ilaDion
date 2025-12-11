@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Attendance System</title>
+
+    <!-- W3CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/w3.css') }}">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="page-body">
+
+    <!-- TOP BAR -->
+    <header class="top-bar">
+        <div class="course-title">PYTHON</div>
+        <a href="{{ url_for('index') }}" class="login-btn">BACK</a>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-container">
+
+        <div class="auth-card">
+
+            <h2 class="auth-title">Welcome</h2>
+            <p class="auth-subtitle">Sign in to continue or create a new account.</p>
+
+            <!-- Tabs -->
+            <div class="auth-tabs">
+                <button type="button" class="auth-tab active" data-target="#login-form">Login</button>
+                <button type="button" class="auth-tab" data-target="#register-form">Register</button>
+            </div>
+
+            <!-- ✅ FLASH MESSAGES (back here again) -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <!-- LOGIN FORM -->
+            <form id="login-form" class="auth-form" method="POST">
+                <input type="hidden" name="form_type" value="login">
+
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
+                        <button
+                            type="button"
+                            class="password-toggle-btn"
+                            data-password-toggle="login-password">
+                            👁
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="primary-btn">Login</button>
+            </form>
+
+            <!-- REGISTER FORM -->
+            <form id="register-form" class="auth-form auth-form-hidden" method="POST">
+                <input type="hidden" name="form_type" value="register">
+
+                <div class="form-group">
+                    <label for="reg-email">Email Address</label>
+                    <input type="email" id="reg-email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="reg-password" name="password" placeholder="Create a password" required>
+                        <button
+                            type="button"
+                            class="password-toggle-btn"
+                            data-password-toggle="reg-password">
+                            👁
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-confirm-password">Confirm Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="reg-confirm-password" name="confirm_password" placeholder="Re-enter password" required>
+                        <button
+                            type="button"
+                            class="password-toggle-btn"
+                            data-password-toggle="reg-confirm-password">
+                            👁
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="primary-btn">Create Account</button>
+            </form>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        ©copyright 
+    </footer>
+
+    <!-- Load shared JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>

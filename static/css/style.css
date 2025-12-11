@@ -1,0 +1,961 @@
+/* GENERAL PAGE LAYOUT */
+.page-body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* TOP BAR */
+.top-bar {
+    background-color: #000;
+    color: #fff;
+    /* fixed height so all top bars look identical */
+    height: 56px;              /* <<< you can tweak this number */
+    padding: 0 20px;           /* horizontal padding only */
+    display: flex;
+    align-items: center;       /* centers text vertically */
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+/* USER LIST SCROLL*/
+.admin-user-table {
+    max-height: 400px; 
+    overflow-y: auto;
+}
+
+.course-title {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* LOGIN BUTTON (top-right) */
+.login-btn {
+    padding: 6px 24px;
+    border: 2px solid #fff;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.login-btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* MAIN CONTENT */
+.main-container {
+    margin-top: 60px;
+    text-align: center;
+}
+
+/* Scanner wrapper (centers QR + status) */
+.scanner-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* big square center (QR box) */
+.qr-box {
+    width: 320px;
+    height: 240px;
+    margin: 0 auto 10px auto;
+    border: 4px solid #000;
+    background-color: #fff;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.qr-box::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 999px;
+    animation: scan-line 2s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes scan-line {
+    0%   { top: 10px; }
+    50%  { top: calc(100% - 10px - 3px); }
+    100% { top: 10px; }
+}
+
+/* Status pill under QR */
+.scanner-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 999px;
+    font-size: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: #ffc107;
+    animation: status-pulse 1.5s ease-in-out infinite;
+}
+
+.status-dot.status-success {
+    background-color: #00c851;
+}
+
+.status-dot.status-error {
+    background-color: #ff4444;
+}
+
+@keyframes status-pulse {
+    0%   { transform: scale(1); opacity: 1; }
+    50%  { transform: scale(1.4); opacity: 0.3; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* result box under QR */
+.scan-result {
+    margin: 20px auto 0 auto;
+    width: 60%;
+    min-height: 32px;
+    border: 1px solid #000;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+/* horizontal line */
+.center-line {
+    width: 60%;
+    margin: 30px auto 0 auto;
+    border: none;
+    border-top: 4px solid #000;
+}
+
+/* FOOTER COPYRIGHT */
+.footer {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 40px;
+    padding-bottom: 20px;
+}
+
+/* AUTH CARD (Login/Register Page) */
+.auth-card {
+    width: 380px;
+    margin: 50px auto;
+    padding: 28px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    text-align: left;
+}
+
+.auth-title {
+    font-size: 22px;
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.auth-subtitle {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 18px;
+}
+
+/* Tabs */
+.auth-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 16px;
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    border-bottom: 2px solid transparent;
+}
+
+.auth-tab.active {
+    border-bottom: 2px solid #000;
+}
+
+/* Forms */
+.auth-form {
+    margin-top: 8px;
+}
+
+.auth-form-hidden {
+    display: none;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: block;
+    color: #222;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 11px;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #000;
+}
+
+/* ================================
+   PASSWORD INPUT + EYE ICON
+   ================================ */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input[type="password"],
+.password-wrapper input[type="text"] {
+    padding-right: 2.6rem;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0;
+    line-height: 1;
+}
+
+.password-toggle-btn:focus {
+    outline: none;
+}
+
+/* Buttons */
+.primary-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 6px;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.primary-btn:hover {
+    background-color: #333;
+}
+
+/* =====================================================
+   FLASH MESSAGES (clean, original style + auto-hide)
+   ===================================================== */
+
+.flash-messages {
+    margin-bottom: 14px;
+}
+
+.flash-message {
+    padding: 8px 10px;
+    font-size: 13px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border: 1px solid transparent;
+    transition: opacity 0.5s ease, height 0.5s ease, margin 0.5s ease, padding 0.5s ease;
+}
+
+.flash-success {
+    background-color: #E7F9E9;
+    border-color: #8CE18E;
+}
+
+.flash-error {
+    background-color: #FBE8E8;
+    border-color: #E58383;
+}
+
+.flash-info {
+    background-color: #EAF2FF;
+    border-color: #83A8E5;
+}
+
+/* Auto-hide animation (added by JS) */
+.flash-hide {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Add spacing below the top bar only for flash messages on index page */
+.main-container .flash-messages {
+    margin-top: 20px;
+}
+
+
+
+/* ADMIN LAYOUT */
+.admin-layout {
+    display: flex;
+    min-height: calc(100vh - 60px);
+}
+
+.admin-sidebar {
+    width: 220px;
+    border-right: 4px solid #000;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding-top: 25px;
+}
+
+.admin-sidebar-item {
+    padding: 10px 24px;
+    text-align: left;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.admin-sidebar-item:hover {
+    background-color: #e0e0e0;
+}
+
+.admin-main {
+    flex: 1;
+    padding: 30px;
+}
+
+.admin-section-title {
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.admin-grid {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.admin-panel {
+    background-color: #fff;
+    border: 4px solid #000;
+    border-radius: 8px;
+    padding: 18px 18px 20px 18px;
+    box-sizing: border-box;
+	height: 100%;
+}
+
+.admin-user-form {
+    width: 35%;
+}
+
+.admin-user-table {
+    width: 65%;
+	height: 800px;
+    overflow-y: auto; 
+	flex: none; 
+	
+}
+
+.admin-panel-title {
+    font-weight: bold;
+    margin-bottom: 12px;
+    border-bottom: 3px solid #000;
+    padding-bottom: 4px;
+}
+
+.admin-form-label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.admin-form-input {
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+.admin-form-buttons {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-btn-outline {
+    padding: 6px 20px;
+    border: 2px solid #000;
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
+    font-size: 13px;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.admin-btn-outline:hover {
+    background-color: #e0e0e0;
+}
+
+.admin-btn-small {
+    padding: 4px 10px;
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+.admin-table-head th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+}
+
+.logout-btn {
+    padding: 6px 24px;
+    border: 2px solid #fff;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.logout-btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* ================================
+   DELETE CONFIRMATION MODAL
+   ================================ */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: none; /* hidden by default */
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal-dialog {
+    background: #fff;
+    border-radius: 8px;
+    border: 4px solid #000;
+    padding: 20px 22px 18px 22px;
+    max-width: 380px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+.modal-title {
+    margin: 0 0 8px 0;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.modal-message {
+    margin: 0 0 18px 0;
+    font-size: 14px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* ================================
+   STUDENT PHOTO PLACEHOLDER (FIXED)
+   ================================ */
+.student-photo-placeholder {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    border: 4px solid #000;
+    margin: 0 auto 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;   /* VERY IMPORTANT for circle clipping */
+    position: relative; /* ensures inner image sits correctly */
+}
+
+
+/* ================================
+   ADD BUTTON (Student Management)
+   ================================ */
+.admin-btn-primary {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #000;
+    color: #fff !important;
+    border: 2px solid #000;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.admin-btn-primary:hover {
+    background-color: #444;
+    color: #fff !important;
+}
+
+/* ================================
+   STUDENT FORM PAGE
+   ================================ */
+.student-form-wrapper {
+    max-width: 900px;
+    margin: 20px auto 0 auto;
+}
+
+/* CAMERA + RESULT top layout */
+.student-top-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 16px;
+}
+
+.student-top-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* center boxes horizontally */
+}
+
+/* Oval label above camera/result */
+.oval-title {
+    display: inline-block;
+    padding: 4px 18px;
+    border-radius: 999px;
+    border: 2px solid #000;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* Camera viewer box */
+.camera-box {
+    width: 360px !important;
+    height: 260px !important;
+    border: 3px solid #000;
+    border-radius: 8px;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Photo result box */
+.photo-result-box {
+    width: 360px !important;
+    height: 260px !important;
+    border: 3px solid #000;
+    border-radius: 8px;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.photo-result-box img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+/* Make webcam video fill the same space as the result image */
+#camera-viewer video,
+#camera-viewer canvas {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    display: block;
+}
+
+/* Input fields layout */
+.student-fields {
+    margin-top: 10px;
+}
+
+/* QR Code box */
+.qr-box-student {
+    width: 220px;
+    height: 220px;
+    border: 3px solid #000;
+    margin: 6px auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+
+/* Cancel & Save buttons */
+.student-form-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* QR SECTION (Student Form) */
+.qr-section {
+    margin-top: 16px;
+    text-align: center;
+}
+
+.qr-box-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+/* attendancee */
+.sidebar {
+    width: 220px;
+    background-color: #f4f4f4;
+    padding-top: 20px;
+    position: fixed;
+    height: 100%;
+    box-sizing: border-box;
+	color: #fff;
+	
+}
+
+.sidebar-item {
+    display: block;
+    padding: 12px 20px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    margin-bottom: 12px;
+
+}
+
+.sidebar-item:hover {
+    background-color: #e0e0e0;
+}
+
+.sidebar-item.active {
+    background-color: #ccc;
+}
+
+/* MAIN CONTENT */
+.container {
+    display: flex;
+    margin-top: 60px; /* Space for fixed top bar */
+}
+
+.main-content {
+    margin-left: 240px; /* Account for the sidebar width */
+    padding: 80px 20px 20px 20px;
+    flex: 1;
+}
+
+/* Date Input Section */
+.date-section {
+    margin-bottom: 20px;
+}
+
+.date-section form {
+    display: flex;
+    align-items: center;
+}
+
+.date-section input[type="date"] {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    outline: none;
+    margin-right: 10px;
+}
+
+.date-section button {
+    padding: 8px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 6px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+}
+
+.date-section button:hover {
+    background-color: #444;
+}
+
+/* ATTENDANCE TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+/* Table Header */
+table thead th {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+/* Table Body */
+table tbody td {
+    text-align: left;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Logout Button in Top Bar */
+.login-btn {
+    padding: 6px 24px;
+    border: 2px solid #fff;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.login-btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* Active item in left admin sidebar for Attendance */
+.admin-sidebar-item.admin-sidebar-item-active {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Attendance controls (date + button) */
+.attendance-controls {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 16px;
+}
+
+.attendance-controls form {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.attendance-date-label {
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+/* Make the date picker fit with other inputs */
+.attendance-controls input[type="date"] {
+    padding: 8px 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    outline: none;
+}
+
+.attendance-controls input[type="date"]:focus {
+    border-color: #000;
+}
+
+/* Smaller GO button to match style */
+.attendance-go-btn {
+    padding: 8px 20px;
+    font-size: 13px;
+}
+
+/* Attendance table styling (inside admin panel) */
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+.attendance-table th,
+.attendance-table td {
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+}
+
+.attendance-table thead th {
+    background-color: #f5f5f5;
+    font-weight: 700;
+    text-align: left;
+}
+
+.attendance-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.attendance-table tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+/* Wrap table nicely inside panel */
+.attendance-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* ============================================================
+   QR PAGE (index.html)
+   ============================================================ */
+
+/* ---------- LAYOUT: Scanner (left) + Student Info Card (right) ---------- */
+.qr-layout {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+/* ============================================================
+   STUDENT INFO CARD (Right Side, 3-second popup)
+   ============================================================ */
+
+/* Wrapper box */
+.scan-student-card {
+    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 6px;
+    min-width: 220px;
+    opacity: 0;                 /* hidden by default */
+    transition: opacity 0.2s ease;
+}
+
+/* Shown state (added by JS) */
+.scan-student-card.show {
+    opacity: 1;
+}
+
+/* Photo circle */
+.scan-photo-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 8px auto;
+    background: #eee;
+}
+
+/* Inside photo */
+.scan-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Each row in student info */
+.scan-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+/* Label (LEFT) */
+.scan-label {
+    font-weight: bold;
+}
+
+/* Value (RIGHT) */
+.scan-value {
+    font-weight: 500;
+    color: #333;
+    text-align: right;
+    flex: 1;
+    padding-left: 10px;
+}
+
+/* Info text under student card (e.g., “Student not found”) */
+.scan-info-message {
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+/* Footnote below card */
+.scan-note {
+    font-size: 11px;
+    color: #666;
+    margin-top: 5px;
+}

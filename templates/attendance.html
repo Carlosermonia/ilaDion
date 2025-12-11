@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance</title>
+
+    <!-- W3CSS -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="page-body">
+
+    <!-- TOP BAR -->
+    <header class="top-bar">
+        <div class="course-title">PYTHON</div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <div class="admin-layout">
+
+        <!-- LEFT SIDEBAR -->
+        <aside class="admin-sidebar">
+            <a href="{{ url_for('admin') }}" class="admin-sidebar-item">USER MANAGEMENT</a>
+            <a href="{{ url_for('students') }}" class="admin-sidebar-item">STUDENT MANAGEMENT</a>
+            <a href="{{ url_for('attendance') }}" class="admin-sidebar-item admin-sidebar-item-active">ATTENDANCE</a>
+            <a href="{{ url_for('logout') }}" class="admin-sidebar-item">LOG OUT</a>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="admin-main">
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <h3 class="admin-section-title">ATTENDANCE</h3>
+
+            <section class="admin-panel">
+
+                <!-- DATE FILTER -->
+                <div class="attendance-controls">
+                    <!-- VERY IMPORTANT: method="get" and name="date" -->
+                    <form method="get" action="{{ url_for('attendance') }}">
+                        <span class="attendance-date-label">DATE</span>
+                        <input
+                            type="date"
+                            name="date"
+                            value="{{ selected_date }}"
+                            required
+                            onchange="this.form.submit();"
+                        >
+                        <button type="submit" class="admin-btn-primary attendance-go-btn">
+                            GO
+                        </button>
+                    </form>
+                </div>
+
+                <p style="font-size: 13px; margin-bottom: 6px;">
+                    Showing attendance for: <strong>{{ selected_date }}</strong>
+                </p>
+
+                <!-- TABLE -->
+                <div class="attendance-table-wrapper">
+                    <table class="attendance-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>TIME IN</th>
+                                <th>ID NO</th>
+                                <th>NAME</th>
+                                <th>COURSE / LEVEL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if records %}
+                                {% for rec in records %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ rec.time_in }}</td>
+                                    <td>{{ rec.student_id }}</td>
+                                    <td>{{ rec.name }}</td>
+                                    <td>{{ rec.course_level }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" style="text-align:center; padding:12px;">
+                                        No attendance records for {{ selected_date }}.
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
